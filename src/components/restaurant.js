@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import RestaurantMenu from "./restaurant-menu";
 
-class Restaurant extends Component {
+class Restaurant extends PureComponent {
   render() {
     const { image, name, menu, isMenuOpen } = this.props;
 
@@ -18,7 +18,7 @@ class Restaurant extends Component {
   }
 
   handleToggleOpenClick = () => {
-    this.props.toggleOpenMenu();
+    this.props.toggleOpenMenu(this.props.id);
   };
 }
 

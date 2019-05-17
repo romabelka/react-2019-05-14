@@ -16,7 +16,7 @@ class RestaurantList extends Component {
             key={restaurant.id}
             {...restaurant}
             isMenuOpen={openRestaurantMenuId === restaurant.id}
-            toggleOpenMenu={() => this.toggleOpenRestaurantMenu(restaurant.id)}
+            toggleOpenMenu={this.toggleOpenRestaurantMenu}
           />
         ))}
       </div>
