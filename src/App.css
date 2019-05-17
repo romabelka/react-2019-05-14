@@ -1,0 +1,12 @@
+ul,
+ul > li {
+  list-style: none;
+}
+
+li > h2 > *,
+li > h3 > * {
+  line-height: 48px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 24px;
+}
