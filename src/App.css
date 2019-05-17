@@ -1,3 +1,7 @@
+.App {
+  padding: 24px;
+}
+
 ul,
 ul > li {
   list-style: none;

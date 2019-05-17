@@ -3,15 +3,23 @@ import RestaurantMenu from "./restaurant-menu";
 
 class Restaurant extends Component {
   render() {
-    const { image, name, menu } = this.props;
+    const { image, name, menu, isMenuOpen } = this.props;
+
     return (
       <div>
         <img src={image} width={64} height={64} alt={name} />
         <h3>{name}</h3>
-        <RestaurantMenu menu={menu} />
+        <button onClick={this.handleToggleOpenClick}>
+          {isMenuOpen ? "Close menu" : "Open menu"}
+        </button>
+        {isMenuOpen ? <RestaurantMenu menu={menu} /> : null}
       </div>
     );
   }
+
+  handleToggleOpenClick = () => {
+    this.props.toggleOpenMenu();
+  };
 }
 
 export default Restaurant;
