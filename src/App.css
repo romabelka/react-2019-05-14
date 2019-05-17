@@ -14,3 +14,8 @@ li > h3 > * {
   vertical-align: middle;
   margin-right: 24px;
 }
+
+.map {
+  width: 500px;
+  height: 300px;
+}
