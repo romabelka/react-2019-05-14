@@ -6,6 +6,15 @@ import ReviewList from "./review-list";
 import { toggleVisibility } from "../decorators/toggleVisibility";
 
 class Restaurant extends PureComponent {
+  state = {
+    error: null
+  };
+  componentDidCatch(error) {
+    this.setState({
+      error
+    });
+  }
+
   render() {
     const {
       image,
@@ -17,7 +26,9 @@ class Restaurant extends PureComponent {
       toggleVisibility
     } = this.props;
 
-    return (
+    return this.state.error ? (
+      "Not available"
+    ) : (
       <>
         <List.Item
           style={{ paddingLeft: "8px" }}

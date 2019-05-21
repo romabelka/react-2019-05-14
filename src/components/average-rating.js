@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import { Rate } from "antd";
+import PropTypes from "prop-types";
 
 class AverageRating extends PureComponent {
   state = {
@@ -17,5 +18,9 @@ class AverageRating extends PureComponent {
     return <Rate defaultValue={normalizedRating} disabled />;
   }
 }
+
+AverageRating.propTypes = {
+  reviews: PropTypes.arrayOf(PropTypes.object).isRequired
+};
 
 export default AverageRating;
