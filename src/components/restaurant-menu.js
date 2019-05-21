@@ -4,7 +4,7 @@ import { Row, Col } from "antd";
 
 function RestaurantMenu(props) {
   return (
-    <div style={{ padding: "16px" }}>
+    <div data-automation-id="menu" style={{ padding: "16px" }}>
       <Row gutter={16}>
         {props.menu.map(dish => (
           <Col key={dish.id} span={8}>

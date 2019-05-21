@@ -17,6 +17,7 @@ class Restaurant extends PureComponent {
 
   render() {
     const {
+      id,
       image,
       name,
       menu,
@@ -37,7 +38,10 @@ class Restaurant extends PureComponent {
             <Button onClick={toggleVisibility}>
               {isReviewOpen ? "Hide reviews" : "Show reviews"}
             </Button>,
-            <Button onClick={this.handleToggleOpenClick}>
+            <Button
+              data-automation-id={`toggle-menu`}
+              onClick={this.handleToggleOpenClick}
+            >
               {isMenuOpen ? "Close menu" : "Open menu"}
             </Button>
           ]}

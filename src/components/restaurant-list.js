@@ -4,6 +4,10 @@ import { accordion } from "../decorators/accordion";
 import { List } from "antd";
 
 class RestaurantList extends Component {
+  componentDidMount() {
+    this.props.fetchData && this.props.fetchData();
+  }
+
   render() {
     const {
       restaurants,
