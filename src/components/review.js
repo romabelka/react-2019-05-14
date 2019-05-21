@@ -8,15 +8,15 @@ function Review({ review }) {
         margin: "16px",
         backgroundColor: "white"
       }}
-      author={[
-        review.user,
+      author={review.user}
+      content={review.text}
+      actions={[
         <Rate
           disabled
           defaultValue={review.rating}
           style={{ marginLeft: "24px" }}
         />
       ]}
-      content={review.text}
     />
   );
 }

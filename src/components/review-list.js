@@ -6,7 +6,7 @@ function ReviewList({ reviews }) {
   return (
     <List>
       {reviews.map(review => (
-        <Review review={review} />
+        <Review key={review.id} review={review} />
       ))}
     </List>
   );
