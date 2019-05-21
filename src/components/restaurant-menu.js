@@ -7,8 +7,8 @@ function RestaurantMenu(props) {
     <div style={{ padding: "16px" }}>
       <Row gutter={16}>
         {props.menu.map(dish => (
-          <Col span={8}>
-            <Dish key={dish.id} {...dish} />
+          <Col key={dish.id} span={8}>
+            <Dish {...dish} />
           </Col>
         ))}
       </Row>
