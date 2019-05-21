@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Restaurant from "./restaurant";
 import { accordion } from "../decorators/accordion";
+import { List } from "antd";
 
 class RestaurantList extends Component {
   render() {
@@ -12,7 +13,7 @@ class RestaurantList extends Component {
       toggleOpenItem
     } = this.props;
     return (
-      <div>
+      <List>
         {restaurants.map(restaurant => (
           <Restaurant
             key={restaurant.id}
@@ -21,7 +22,7 @@ class RestaurantList extends Component {
             toggleOpenMenu={toggleOpenItem}
           />
         ))}
-      </div>
+      </List>
     );
   }
 }
