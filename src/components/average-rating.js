@@ -7,18 +7,14 @@ class AverageRating extends PureComponent {
   };
 
   render() {
-    return <Rate defaultValue={this.state.value} disabled />;
-  }
-
-  static getDerivedStateFromProps(props, state) {
-    const { reviews } = props;
+    const { reviews } = this.props;
     const rawRating =
       reviews.reduce((acc, { rating }) => {
         return acc + rating;
       }, 0) / reviews.length;
-    return {
-      value: Math.floor(rawRating * 2) / 2
-    };
+    const normalizedRating = Math.floor(rawRating * 2) / 2;
+
+    return <Rate defaultValue={normalizedRating} disabled />;
   }
 }
 
