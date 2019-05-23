@@ -1,5 +1,6 @@
 import React from "react";
 import { Comment, Rate } from "antd";
+import PropTypes from "prop-types";
 
 function Review({ review }) {
   return (
@@ -20,5 +21,13 @@ function Review({ review }) {
     />
   );
 }
+
+Review.propTypes = {
+  review: PropTypes.shape({
+    user: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired
+  }).isRequired
+};
 
 export default Review;
