@@ -20,7 +20,9 @@ class AverageRating extends PureComponent {
 }
 
 AverageRating.propTypes = {
-  reviews: PropTypes.arrayOf(PropTypes.object).isRequired
+  reviews: PropTypes.arrayOf(
+    PropTypes.shape({ rating: PropTypes.number.isRequired }).isRequired
+  ).isRequired
 };
 
 export default AverageRating;
