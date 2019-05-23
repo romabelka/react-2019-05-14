@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Leaflet from "leaflet";
-import * as PropTypes from "prop-types";
 
 class RestaurantsMap extends Component {
   render() {
@@ -25,16 +24,5 @@ class RestaurantsMap extends Component {
     });
   }
 }
-
-RestaurantsMap.propTypes = {
-  restaurants: PropTypes.arrayOf(
-    PropTypes.shape({
-      location: PropTypes.shape({
-        lat: PropTypes.number.isRequired,
-        lng: PropTypes.number.isRequired
-      }).isRequired
-    })
-  ).isRequired
-};
 
 export default RestaurantsMap;
