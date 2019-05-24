@@ -3,3 +3,6 @@
 .App {
   min-height: 100%;
 }
+.header {
+  text-align: right;
+}

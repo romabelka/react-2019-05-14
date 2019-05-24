@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { Card, Button } from "antd";
 import PropTypes from "prop-types";
 import "./dish.css";
+import { connect } from "react-redux";
+import { increaseCart, decreaseCart } from "../../ac";
 
 function Dish(props) {
-  const [amount, decrease, increase] = useCounter(0);
+  const { id, amount, increase, decrease } = props;
   return (
     <Card
       bordered
@@ -14,13 +16,13 @@ function Dish(props) {
           <span className="dish-price">{amount}</span>
           <Button.Group>
             <Button
-              onClick={decrease}
+              onClick={() => decrease(id)}
               type="primary"
               shape="circle"
               icon="minus"
             />
             <Button
-              onClick={increase}
+              onClick={() => increase(id)}
               type="primary"
               shape="circle"
               icon="plus"
@@ -37,19 +39,18 @@ function Dish(props) {
   );
 }
 
-function useCounter(initialValue) {
-  const [value, setAmount] = useState(initialValue);
-  return [
-    value,
-    () => setAmount(value <= 0 ? 0 : value - 1),
-    () => setAmount(value + 1)
-  ];
-}
-
 Dish.propTypes = {
   name: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   ingredients: PropTypes.arrayOf(PropTypes.string)
 };
 
-export default Dish;
+export default connect(
+  (state, ownProps) => ({
+    amount: state.cart[ownProps.id] || 0
+  }),
+  {
+    increase: increaseCart,
+    decrease: decreaseCart
+  }
+)(Dish);

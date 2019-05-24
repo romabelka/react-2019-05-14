@@ -12,7 +12,7 @@ describe("when show RestaurantList", () => {
     wrapper = mount(<RestaurantList restaurants={restaurants} />);
   });
 
-  describe("when click on Open menu in Restaurant", () => {
+  describe("then click on Open menu in Restaurant", () => {
     beforeEach(() => {
       wrapper
         .find(`button[data-automation-id="toggle-menu-${firstRestaurantId}"]`)
@@ -24,7 +24,7 @@ describe("when show RestaurantList", () => {
     });
   });
 
-  describe("when click on Open reviews in Restaurant", () => {
+  describe("then click on Open reviews in Restaurant", () => {
     beforeEach(() => {
       wrapper
         .find(
@@ -33,7 +33,7 @@ describe("when show RestaurantList", () => {
         .simulate("click");
     });
 
-    it("should open menu", () => {
+    it("should open reviews", () => {
       expect(
         wrapper.find('.ant-list[data-automation-id="review-list"]').length
       ).toEqual(1);

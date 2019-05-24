@@ -10,7 +10,12 @@ function Review({ review }) {
       author={review.user}
       content={review.text}
       actions={[
-        <Rate disabled defaultValue={review.rating} className="review-rating" />
+        <Rate
+          disabled
+          allowHalf
+          defaultValue={review.rating}
+          className="review-rating"
+        />
       ]}
     />
   );
