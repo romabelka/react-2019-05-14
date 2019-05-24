@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Leaflet from "leaflet";
 import * as PropTypes from "prop-types";
+import "./restaurant-map.css";
 
 class RestaurantsMap extends Component {
   render() {

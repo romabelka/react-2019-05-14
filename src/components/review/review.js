@@ -1,22 +1,16 @@
 import React from "react";
 import { Comment, Rate } from "antd";
 import PropTypes from "prop-types";
+import "./review.css";
 
 function Review({ review }) {
   return (
     <Comment
-      style={{
-        margin: "16px",
-        backgroundColor: "white"
-      }}
+      className="review"
       author={review.user}
       content={review.text}
       actions={[
-        <Rate
-          disabled
-          defaultValue={review.rating}
-          style={{ marginLeft: "24px" }}
-        />
+        <Rate disabled defaultValue={review.rating} className="review-rating" />
       ]}
     />
   );

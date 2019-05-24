@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import Restaurant from "./restaurant";
-import { accordion } from "../decorators/accordion";
+import Restaurant from "../restaurant";
+import { accordion } from "../../decorators/accordion";
 import { List } from "antd";
 import * as PropTypes from "prop-types";
 

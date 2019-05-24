@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Form, Input, Button } from "antd";
+import "./user-form.css";
 
 class UserForm extends Component {
   state = {
@@ -10,7 +11,7 @@ class UserForm extends Component {
   render() {
     const { name, phone, address } = this.state;
     return (
-      <Form style={{ marginTop: "24px" }}>
+      <Form className="user-form">
         <Form.Item
           label="Name"
           labelCol={{ span: 4 }}
@@ -32,7 +33,7 @@ class UserForm extends Component {
         >
           <Input.TextArea value={address} onChange={this.handleAddressChange} />
         </Form.Item>
-        <Form.Item style={{ textAlign: "center" }}>
+        <Form.Item className="user-form-submit-section">
           <Button type="primary" htmlType="submit" onClick={this.submit}>
             Send order
           </Button>
