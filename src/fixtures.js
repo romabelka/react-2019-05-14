@@ -381,4 +381,10 @@ const normalizedUsers = [
   }
 ];
 
-export { restaurants };
+export {
+  restaurants,
+  normalizedDishes,
+  normalizedRestaurants,
+  normalizedReviews,
+  normalizedUsers
+};
