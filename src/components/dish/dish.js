@@ -1,19 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
 import { Card, Button } from "antd";
 import PropTypes from "prop-types";
 import "./dish.css";
 import { connect } from "react-redux";
 import { increaseCart, decreaseCart } from "../../ac";
+import Price from "../price";
 
 function Dish(props) {
-  const { id, amount, increase, decrease } = props;
+  const { id, amount, increase, decrease, price } = props;
   return (
     <Card
       bordered
       actions={[
-        `£${props.price}`,
+        <Price value={price} />,
         <>
-          <span className="dish-price">{amount}</span>
+          <span className="dish-amount">{amount}</span>
           <Button.Group>
             <Button
               onClick={() => decrease(id)}

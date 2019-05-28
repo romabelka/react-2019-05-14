@@ -2,6 +2,7 @@
 
 .App {
   min-height: 100%;
+  overflow: hidden;
 }
 .header {
   text-align: right;
