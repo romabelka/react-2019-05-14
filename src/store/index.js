@@ -1,6 +1,11 @@
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
 import reducer from "../reducers";
-const store = createStore(reducer);
+import logger from "../middlewares";
+import { composeWithDevTools } from "redux-devtools-extension";
+
+const enhancer = composeWithDevTools(applyMiddleware(logger));
+
+const store = createStore(reducer, enhancer);
 
 // dev mode
 window.store = store;

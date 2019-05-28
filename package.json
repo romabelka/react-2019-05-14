@@ -39,7 +39,8 @@
     "enzyme-adapter-react-16": "^1.13.1",
     "husky": "^2.3.0",
     "prettier": "1.17.1",
-    "pretty-quick": "^1.10.0"
+    "pretty-quick": "^1.10.0",
+    "redux-devtools-extension": "^2.13.8"
   },
   "husky": {
     "hooks": {
