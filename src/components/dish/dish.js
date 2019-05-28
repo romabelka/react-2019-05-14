@@ -5,6 +5,7 @@ import "./dish.css";
 import { connect } from "react-redux";
 import { increaseCart, decreaseCart } from "../../ac";
 import Price from "../price";
+import { createDishSelector } from "../../selectors";
 
 function Dish(props) {
   const { id, amount, increase, decrease, price } = props;
@@ -41,15 +42,27 @@ function Dish(props) {
 }
 
 Dish.propTypes = {
+  id: PropTypes.string.isRequired,
+
+  // from connect
   name: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   ingredients: PropTypes.arrayOf(PropTypes.string)
 };
 
+const initMapStateToProps = () => {
+  const dishSelector = createDishSelector();
+
+  return (state, ownProps) => {
+    return {
+      amount: state.cart[ownProps.id] || 0,
+      ...dishSelector(state, ownProps)
+    };
+  };
+};
+
 export default connect(
-  (state, ownProps) => ({
-    amount: state.cart[ownProps.id] || 0
-  }),
+  initMapStateToProps,
   {
     increase: increaseCart,
     decrease: decreaseCart

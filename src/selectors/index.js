@@ -1,7 +1,19 @@
 import { createSelector } from "reselect";
 
+export const idSelector = (_, ownProps) => ownProps.id;
 export const cartSelector = state => state.cart;
 export const restaurantsSelector = state => state.restaurants;
+export const dishesSelector = state => state.dishes;
+
+export const createDishSelector = () =>
+  createSelector(
+    dishesSelector,
+    idSelector,
+    (dishes, id) => {
+      console.log("dishSelector");
+      return dishes.find(dish => dish.id === id);
+    }
+  );
 
 export const selectAllDishesAndTotalPrice = createSelector(
   cartSelector,

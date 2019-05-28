@@ -1,5 +1,5 @@
-import { restaurants } from "../fixtures";
+import { normalizedRestaurants } from "../fixtures";
 
-export default (restaurantsState = restaurants, action) => {
+export default (restaurantsState = normalizedRestaurants, action) => {
   return restaurantsState;
 };

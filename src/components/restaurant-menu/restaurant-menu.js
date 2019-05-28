@@ -7,9 +7,9 @@ function RestaurantMenu(props) {
   return (
     <div data-automation-id="menu" className="restaurant-menu">
       <Row gutter={16}>
-        {props.menu.map(dish => (
-          <Col key={dish.id} span={8}>
-            <Dish {...dish} />
+        {props.menu.map(dishId => (
+          <Col key={dishId} span={8}>
+            <Dish id={dishId} />
           </Col>
         ))}
       </Row>
