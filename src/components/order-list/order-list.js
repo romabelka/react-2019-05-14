@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { increaseCart, decreaseCart, deleteFromCart } from "../../ac";
 import "./order-list.css";
 import Price from "../price";
+import { selectAllDishesAndTotalPrice } from "../../selectors";
 
 class OrderList extends Component {
   render() {
@@ -14,6 +15,7 @@ class OrderList extends Component {
       decreaseCart,
       deleteFromCart
     } = this.props;
+    console.log("OrderList render");
     if (dishes.length === 0) {
       return null;
     }
@@ -70,29 +72,7 @@ class OrderList extends Component {
 }
 
 export default connect(
-  state => {
-    const { cart, restaurants } = state;
-    let totalPrice = 0;
-    const allDishes = restaurants.reduce((dishes, restaurant) => {
-      restaurant.menu.forEach(dish => {
-        const amount = cart[dish.id];
-        if (amount) {
-          const totalDishPrice = amount * dish.price;
-          totalPrice += totalDishPrice;
-          dishes.push({
-            ...dish,
-            amount,
-            totalDishPrice
-          });
-        }
-      });
-      return dishes;
-    }, []);
-    return {
-      dishes: allDishes,
-      totalPrice
-    };
-  },
+  selectAllDishesAndTotalPrice,
   {
     increaseCart,
     decreaseCart,

@@ -5,9 +5,10 @@ import { increase, decrease } from "../../ac";
 
 class Counter extends Component {
   render() {
+    console.log("Counter");
     return (
       <div>
-        <span style={{ color: "white" }}>{this.props.countFromStore}</span>
+        <span style={{ color: "black" }}>{this.props.countFromStore}</span>
         <Button.Group>
           <Button onClick={this.decrease} type="primary" icon="minus" />
           <Button onClick={this.increase} type="primary" icon="plus" />
