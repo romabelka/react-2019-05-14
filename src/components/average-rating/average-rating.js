@@ -1,6 +1,8 @@
 import React, { PureComponent } from "react";
 import { Rate } from "antd";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { createReviewsSelector } from "../../selectors";
 
 class AverageRating extends PureComponent {
   state = {
@@ -20,9 +22,19 @@ class AverageRating extends PureComponent {
 }
 
 AverageRating.propTypes = {
+  id: PropTypes.string.isRequired,
   reviews: PropTypes.arrayOf(
     PropTypes.shape({ rating: PropTypes.number.isRequired }).isRequired
   ).isRequired
 };
 
-export default AverageRating;
+const initMapStateToProps = () => {
+  const reviewsSelector = createReviewsSelector();
+  return (state, ownProps) => {
+    return {
+      reviews: reviewsSelector(state, ownProps)
+    };
+  };
+};
+
+export default connect(initMapStateToProps)(AverageRating);

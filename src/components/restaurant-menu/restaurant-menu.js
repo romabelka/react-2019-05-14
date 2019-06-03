@@ -18,7 +18,7 @@ function RestaurantMenu(props) {
 }
 
 RestaurantMenu.propTypes = {
-  menu: PropTypes.arrayOf(PropTypes.shape(Dish.propTypes)).isRequired
+  menu: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
 export default RestaurantMenu;

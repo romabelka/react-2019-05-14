@@ -1,7 +1,9 @@
 import React from "react";
 import { List } from "antd";
-import Review from "../review";
+import Review, { ReviewPropType } from "../review";
 import PropTypes from "prop-types";
+import { createReviewsSelector } from "../../selectors";
+import { connect } from "react-redux";
 
 function ReviewList({ reviews }) {
   return (
@@ -14,7 +16,17 @@ function ReviewList({ reviews }) {
 }
 
 ReviewList.propTypes = {
-  reviews: PropTypes.arrayOf(Review.propTypes.review)
+  id: PropTypes.string.isRequired,
+  reviews: PropTypes.arrayOf(PropTypes.shape(ReviewPropType))
 };
 
-export default ReviewList;
+const initMapStateToProps = () => {
+  const reviewsSelector = createReviewsSelector();
+  return (state, ownProps) => {
+    return {
+      reviews: reviewsSelector(state, ownProps)
+    };
+  };
+};
+
+export default connect(initMapStateToProps)(ReviewList);

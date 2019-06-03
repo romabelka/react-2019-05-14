@@ -4,37 +4,35 @@ export const idSelector = (_, ownProps) => ownProps.id;
 export const cartSelector = state => state.cart;
 export const restaurantsSelector = state => state.restaurants;
 export const dishesSelector = state => state.dishes;
+export const reviewsSelector = state => state.reviews;
+export const usersSelector = state => state.users;
 
 export const createDishSelector = () =>
   createSelector(
     dishesSelector,
     idSelector,
     (dishes, id) => {
-      console.log("dishSelector");
       return dishes.find(dish => dish.id === id);
     }
   );
 
 export const selectAllDishesAndTotalPrice = createSelector(
   cartSelector,
-  restaurantsSelector,
-  (cart, restaurants) => {
-    console.log("selectAllDishesAndTotalPrice");
+  dishesSelector,
+  (cart, dishes) => {
     let totalPrice = 0;
-    const allDishes = restaurants.reduce((dishes, restaurant) => {
-      restaurant.menu.forEach(dish => {
-        const amount = cart[dish.id];
-        if (amount) {
-          const totalDishPrice = amount * dish.price;
-          totalPrice += totalDishPrice;
-          dishes.push({
-            ...dish,
-            amount,
-            totalDishPrice
-          });
-        }
-      });
-      return dishes;
+    const allDishes = dishes.reduce((dishesInOrder, dish) => {
+      const amount = cart[dish.id];
+      if (amount) {
+        const totalDishPrice = amount * dish.price;
+        totalPrice += totalDishPrice;
+        dishesInOrder.push({
+          ...dish,
+          amount,
+          totalDishPrice
+        });
+      }
+      return dishesInOrder;
     }, []);
 
     return {
@@ -43,3 +41,31 @@ export const selectAllDishesAndTotalPrice = createSelector(
     };
   }
 );
+
+export const restaurantSelector = createSelector(
+  restaurantsSelector,
+  idSelector,
+  (restaurants, id) => {
+    return restaurants.find(restaurant => restaurant.id === id);
+  }
+);
+
+export const createUserSelector = () =>
+  createSelector(
+    usersSelector,
+    idSelector,
+    (users, id) => {
+      return users.find(user => user.id === id);
+    }
+  );
+
+export const createReviewsSelector = () =>
+  createSelector(
+    reviewsSelector,
+    restaurantSelector,
+    (reviews, restaurant) => {
+      return restaurant.reviews.map(reviewId =>
+        reviews.find(review => review.id === reviewId)
+      );
+    }
+  );
