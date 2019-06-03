@@ -69,3 +69,17 @@ export const createReviewsSelector = () =>
       );
     }
   );
+
+export const createRatingSelector = () => {
+  const reviewsSelector = createReviewsSelector();
+  return createSelector(
+    reviewsSelector,
+    reviews => {
+      const rawRating =
+        reviews.reduce((acc, { rating }) => {
+          return acc + rating;
+        }, 0) / reviews.length;
+      return Math.floor(rawRating * 2) / 2;
+    }
+  );
+};

@@ -4,13 +4,15 @@ import Review, { ReviewPropType } from "../review";
 import PropTypes from "prop-types";
 import { createReviewsSelector } from "../../selectors";
 import { connect } from "react-redux";
+import AddReview from "../add-review";
 
-function ReviewList({ reviews }) {
+function ReviewList({ reviews, id }) {
   return (
     <List data-automation-id="review-list">
       {reviews.map(review => (
         <Review key={review.id} review={review} />
       ))}
+      <AddReview restaurantId={id} />
     </List>
   );
 }
