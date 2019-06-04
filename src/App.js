@@ -6,7 +6,7 @@ import UserForm from "./components/user-form";
 // import RestaurantsMap from "./components/restaurants-map";
 import { Layout } from "antd";
 import CartBadge from "./components/cart-badge";
-import Counter from "./components/counter";
+// import Counter from "./components/counter";
 import OrderList from "./components/order-list";
 const { Header, Content, Footer } = Layout;
 
@@ -23,9 +23,7 @@ function App(props) {
         <OrderList />
         <UserForm />
       </Content>
-      <Footer>
-        <Counter />
-      </Footer>
+      <Footer>{/*<Counter />*/}</Footer>
     </Layout>
   );
 }

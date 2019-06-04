@@ -2,6 +2,7 @@
   "name": "react-2019-05-14",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:3001/",
   "dependencies": {
     "antd": "^3.18.1",
     "leaflet": "^1.5.1",
@@ -15,7 +16,8 @@
     "uuid": "^3.3.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "concurrently \"react-scripts start\" \"npm run api\"",
+    "api": "node simple_api/server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -36,6 +38,7 @@
     ]
   },
   "devDependencies": {
+    "concurrently": "^4.1.0",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.13.1",
     "husky": "^2.3.0",
