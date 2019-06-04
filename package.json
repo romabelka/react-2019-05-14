@@ -5,6 +5,7 @@
   "proxy": "http://localhost:3001/",
   "dependencies": {
     "antd": "^3.18.1",
+    "immutable": "^4.0.0-rc.12",
     "leaflet": "^1.5.1",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",

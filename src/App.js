@@ -8,6 +8,7 @@ import { Layout } from "antd";
 import CartBadge from "./components/cart-badge";
 // import Counter from "./components/counter";
 import OrderList from "./components/order-list";
+import { restaurantsSelector } from "./selectors";
 const { Header, Content, Footer } = Layout;
 
 function App(props) {
@@ -29,5 +30,5 @@ function App(props) {
 }
 
 export default connect(store => ({
-  restaurants: store.restaurants
+  restaurants: restaurantsSelector(store)
 }))(App);
