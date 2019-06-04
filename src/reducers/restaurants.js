@@ -1,9 +1,36 @@
-import { normalizedRestaurants } from "../fixtures";
-import { ADD_REVIEW } from "../constants";
+import {
+  ADD_REVIEW,
+  FAIL,
+  LOAD_RESTAURANTS,
+  START,
+  SUCCESS
+} from "../constants";
 import { fromJS } from "immutable";
 
-export default (restaurantsState = fromJS(normalizedRestaurants), action) => {
+const initialState = {
+  loaded: false,
+  loading: false,
+  error: null,
+  entities: []
+};
+
+export default (restaurantsState = fromJS(initialState), action) => {
   switch (action.type) {
+    case LOAD_RESTAURANTS + START: {
+      return restaurantsState.set("loading", true);
+    }
+    case LOAD_RESTAURANTS + SUCCESS: {
+      return restaurantsState
+        .set("entities", fromJS(action.response))
+        .set("loading", false)
+        .set("loaded", true);
+    }
+    case LOAD_RESTAURANTS + FAIL: {
+      return restaurantsState
+        .set("loading", false)
+        .set("loaded", false)
+        .set("error", action.error);
+    }
     case ADD_REVIEW: {
       const targetRestaurant = restaurantsState.find(
         restaurant => restaurant.get("id") === action.payload.restaurantId
