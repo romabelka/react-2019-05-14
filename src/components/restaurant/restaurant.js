@@ -6,6 +6,7 @@ import ReviewList from "../review-list";
 import { toggleVisibility } from "../../decorators/toggleVisibility";
 import * as PropTypes from "prop-types";
 import "./restaurant.css";
+import { NavLink } from "react-router-dom";
 
 class Restaurant extends PureComponent {
   state = {
@@ -45,7 +46,7 @@ class Restaurant extends PureComponent {
               data-automation-id={`toggle-menu-${id}`}
               onClick={this.handleToggleOpenClick}
             >
-              {isMenuOpen ? "Close menu" : "Open menu"}
+              <NavLink to={`/restaurant-menu/${id}`}>Go to menu</NavLink>
             </Button>
           ]}
         >
@@ -55,7 +56,6 @@ class Restaurant extends PureComponent {
           />
         </List.Item>
         {isReviewOpen ? <ReviewList id={id} /> : null}
-        {isMenuOpen ? <RestaurantMenu id={id} /> : null}
       </>
     );
   }

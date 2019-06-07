@@ -9,6 +9,7 @@ import OrderList from "./components/order-list";
 import { BrowserRouter, Route, NavLink } from "react-router-dom";
 import ListPage from "./components/routes/list";
 import MapPage from "./components/routes/map";
+import MenuPage from "./components/routes/menu";
 
 const { Header, Content, Footer } = Layout;
 
@@ -37,6 +38,7 @@ function App() {
         <Content>
           <Route path={"/restaurants"} component={ListPage} />
           <Route path={"/restaurant-map"} component={MapPage} />
+          <Route path={"/restaurant-menu/:restaurantId"} component={MenuPage} />
           {/* temporary turn Map off */}
           {/*{<RestaurantsMap />}*/}
           <OrderList />
