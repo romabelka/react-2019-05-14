@@ -1,6 +1,7 @@
 import { createSelector } from "reselect";
 
 export const idSelector = (_, ownProps) => ownProps.id;
+
 export const cartMapSelector = state => state.cart;
 export const restaurantsListSelector = ({ restaurants }) =>
   restaurants.get("entities");
@@ -14,7 +15,6 @@ export const restaurantsLoadedSelector = state =>
   state.restaurants.get("loaded");
 
 export const reviewsLoadingSelector = state => state.reviews.get("loading");
-
 export const reviewsLoadedSelector = state => state.reviews.loaded;
 
 export const usersLoadingSelector = state => state.users.loading;

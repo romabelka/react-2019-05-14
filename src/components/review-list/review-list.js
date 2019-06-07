@@ -5,30 +5,16 @@ import PropTypes from "prop-types";
 import {
   createReviewsSelector,
   reviewsLoadedSelector,
-  reviewsLoadingSelector,
-  usersLoadedSelector,
-  usersLoadingSelector
+  usersLoadedSelector
 } from "../../selectors";
 import { connect } from "react-redux";
 import AddReview from "../add-review";
-import { loadReviews, loadUsers } from "../../ac";
+import { loadAllDataForReviews } from "../../ac";
 
 function ReviewList(props) {
-  const {
-    reviews,
-    id,
-    isReviewsLoading,
-    isReviewsLoaded,
-    isUsersLoading,
-    isUsersLoaded
-  } = props;
+  const { reviews, id, isReviewsLoaded, isUsersLoaded } = props;
   useEffect(() => {
-    if (!isReviewsLoading && !isReviewsLoaded) {
-      props.loadReviews();
-    }
-    if (!isUsersLoading && !isUsersLoaded) {
-      props.loadUsers();
-    }
+    props.loadAllDataForReviews();
   });
   return isReviewsLoaded && isUsersLoaded ? (
     <List data-automation-id="review-list">
@@ -54,9 +40,7 @@ const initMapStateToProps = () => {
   return (state, ownProps) => {
     return {
       reviews: reviewsSelector(state, ownProps),
-      isReviewsLoading: reviewsLoadingSelector(state),
       isReviewsLoaded: reviewsLoadedSelector(state),
-      isUsersLoading: usersLoadingSelector(state),
       isUsersLoaded: usersLoadedSelector(state)
     };
   };
@@ -65,7 +49,6 @@ const initMapStateToProps = () => {
 export default connect(
   initMapStateToProps,
   {
-    loadReviews,
-    loadUsers
+    loadAllDataForReviews
   }
 )(ReviewList);
