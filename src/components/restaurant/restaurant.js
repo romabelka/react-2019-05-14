@@ -22,7 +22,6 @@ class Restaurant extends PureComponent {
       id,
       image,
       name,
-      menu,
       isMenuOpen,
       isOpen: isReviewOpen,
       toggleVisibility
@@ -56,7 +55,7 @@ class Restaurant extends PureComponent {
           />
         </List.Item>
         {isReviewOpen ? <ReviewList id={id} /> : null}
-        {isMenuOpen ? <RestaurantMenu menu={menu} /> : null}
+        {isMenuOpen ? <RestaurantMenu id={id} /> : null}
       </>
     );
   }
@@ -70,7 +69,6 @@ Restaurant.propTypes = {
   id: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  menu: RestaurantMenu.propTypes.menu,
   reviews: PropTypes.arrayOf(PropTypes.string),
 
   isMenuOpen: PropTypes.bool,

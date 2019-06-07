@@ -1,10 +1,11 @@
-import React, { PureComponent } from "react";
+import React, { Component } from "react";
 import { Rate } from "antd";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createRatingSelector } from "../../selectors";
+import { loadReviews } from "../../ac";
 
-class AverageRating extends PureComponent {
+class AverageRating extends Component {
   render() {
     const { rating } = this.props;
     return <Rate value={rating} disabled allowHalf />;
@@ -25,4 +26,9 @@ const initMapStateToProps = () => {
   };
 };
 
-export default connect(initMapStateToProps)(AverageRating);
+export default connect(
+  initMapStateToProps,
+  {
+    loadReviews
+  }
+)(AverageRating);

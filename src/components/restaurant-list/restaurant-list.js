@@ -1,26 +1,40 @@
 import React, { Component } from "react";
 import Restaurant from "../restaurant";
 import { accordion } from "../../decorators/accordion";
-import { List } from "antd";
+import { List, Spin } from "antd";
 import * as PropTypes from "prop-types";
+import { connect } from "react-redux";
+import {
+  restaurantsLoadedSelector,
+  restaurantsLoadingSelector,
+  restaurantsSelector,
+  reviewsLoadedSelector,
+  reviewsLoadingSelector
+} from "../../selectors";
+import { loadRestaurants, loadReviews } from "../../ac";
 
 class RestaurantList extends Component {
   componentDidMount() {
-    this.props.restaurants.length === 0 &&
-      this.props.fetchData &&
-      this.props.fetchData();
+    if (!this.props.loading && !this.props.loaded) {
+      this.props.loadRestaurants();
+    }
+    if (!this.props.isReviewsLoading && !this.props.isReviewsLoaded) {
+      this.props.loadReviews();
+    }
   }
 
   render() {
     const {
       restaurants,
+      loaded,
+      isReviewsLoaded,
 
       // props from accordion decorator
       openItemId,
       toggleOpenItem
     } = this.props;
 
-    return (
+    return loaded && isReviewsLoaded ? (
       <List>
         {restaurants.map(restaurant => (
           <Restaurant
@@ -31,6 +45,10 @@ class RestaurantList extends Component {
           />
         ))}
       </List>
+    ) : (
+      <div style={{ textAlign: "center", padding: "24px" }}>
+        <Spin size="large" />
+      </div>
     );
   }
 }
@@ -49,4 +67,16 @@ RestaurantList.propTypes = {
   toggleOpenItem: PropTypes.func.isRequired
 };
 
-export default accordion(RestaurantList);
+export default connect(
+  store => ({
+    restaurants: restaurantsSelector(store),
+    loading: restaurantsLoadingSelector(store),
+    loaded: restaurantsLoadedSelector(store),
+    isReviewsLoading: reviewsLoadingSelector(store),
+    isReviewsLoaded: reviewsLoadedSelector(store)
+  }),
+  {
+    loadRestaurants,
+    loadReviews
+  }
+)(accordion(RestaurantList));

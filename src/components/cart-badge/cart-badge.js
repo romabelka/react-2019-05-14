@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Badge, Button } from "antd";
 import "./cart-badge.css";
 import { connect } from "react-redux";
+import { cartAmountSelector } from "../../selectors";
 
 function CartBadge(props) {
   return (
@@ -22,5 +23,5 @@ CartBadge.propTypes = {
 };
 
 export default connect(state => ({
-  amount: Object.values(state.cart).reduce((total, dishes) => total + dishes, 0)
+  amount: cartAmountSelector(state)
 }))(CartBadge);

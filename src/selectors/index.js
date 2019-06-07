@@ -1,20 +1,77 @@
 import { createSelector } from "reselect";
 
 export const idSelector = (_, ownProps) => ownProps.id;
-export const cartSelector = state => state.cart;
-export const restaurantsSelector = state =>
-  state.restaurants.get("entities").toJS();
-export const dishesSelector = state => state.dishes;
-export const reviewsSelector = state => state.reviews;
-export const usersSelector = state => state.users;
-export const loadingSelector = state => state.restaurants.get("loading");
+export const cartMapSelector = state => state.cart;
+export const restaurantsListSelector = ({ restaurants }) =>
+  restaurants.get("entities");
+export const dishesMapSelector = state => state.dishes.entities;
+export const reviewsMapSelector = state => state.reviews.entities;
+export const usersMapSelector = state => state.users.entities;
+
+export const restaurantsLoadingSelector = state =>
+  state.restaurants.get("loading");
+export const restaurantsLoadedSelector = state =>
+  state.restaurants.get("loaded");
+
+export const reviewsLoadingSelector = state => state.reviews.get("loading");
+
+export const reviewsLoadedSelector = state => state.reviews.loaded;
+
+export const usersLoadingSelector = state => state.users.loading;
+export const usersLoadedSelector = state => state.users.loaded;
+
+export const dishesLoadingSelector = state => state.dishes.loading;
+export const dishesLoadedSelector = state => state.dishes.loaded;
+
+export const cartSelector = createSelector(
+  cartMapSelector,
+  cartMap => cartMap.toJS()
+);
+
+export const cartAmountSelector = createSelector(
+  cartSelector,
+  cart => Object.values(cart).reduce((total, dishes) => total + dishes, 0)
+);
+
+export const restaurantsSelector = createSelector(
+  restaurantsListSelector,
+  restaurantsList => restaurantsList.toJS()
+);
+
+export const reviewsArraySelector = createSelector(
+  reviewsMapSelector,
+  reviewsMap => {
+    return reviewsMap.valueSeq().toArray();
+  }
+);
+
+export const dishesArraySelector = createSelector(
+  dishesMapSelector,
+  dishesMap => {
+    return dishesMap.valueSeq().toArray();
+  }
+);
+
+export const usersSelector = createSelector(
+  usersMapSelector,
+  usersMap => {
+    return usersMap.valueSeq().toArray();
+  }
+);
+
+export const dishesSelector = createSelector(
+  dishesMapSelector,
+  dishesMap => {
+    return dishesMap.valueSeq().toArray();
+  }
+);
 
 export const createDishSelector = () =>
   createSelector(
-    dishesSelector,
+    dishesMapSelector,
     idSelector,
-    (dishes, id) => {
-      return dishes.find(dish => dish.id === id);
+    (dishesMap, id) => {
+      return dishesMap.get(id);
     }
   );
 
@@ -54,22 +111,32 @@ export const restaurantSelector = createSelector(
 
 export const createUserSelector = () =>
   createSelector(
-    usersSelector,
+    usersMapSelector,
     idSelector,
-    (users, id) => {
-      return users.find(user => user.id === id);
+    (usersMap, id) => {
+      return usersMap.get(id);
     }
   );
 
 export const createReviewsSelector = () =>
   createSelector(
-    reviewsSelector,
+    reviewsArraySelector,
     restaurantSelector,
     (reviews, restaurant) => {
-      // console.log(restaurant);
-      return restaurant.reviews.map(reviewId =>
-        reviews.find(review => review.id === reviewId)
-      );
+      return restaurant.reviews
+        .map(reviewId => reviews.find(review => review.id === reviewId))
+        .filter(Boolean);
+    }
+  );
+
+export const createDishesSelector = () =>
+  createSelector(
+    dishesMapSelector,
+    restaurantSelector,
+    (dishesMap, restaurant) => {
+      return restaurant.menu
+        .map(dishId => dishesMap.get(dishId))
+        .filter(Boolean);
     }
   );
 
