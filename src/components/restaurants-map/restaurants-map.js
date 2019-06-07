@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Leaflet from "leaflet";
 import * as PropTypes from "prop-types";
 import "./restaurant-map.css";
+import { connect } from "react-redux";
+import { restaurantsSelector } from "../../selectors";
 
 class RestaurantsMap extends Component {
   render() {
@@ -20,11 +22,15 @@ class RestaurantsMap extends Component {
       attribution:
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(this.map);
-
+  }
+  componentDidUpdate() {
+    this.renderTiles();
+  }
+  renderTiles = () => {
     this.props.restaurants.forEach(({ location: { lat, lng } }) => {
       Leaflet.marker([lat, lng]).addTo(this.map);
     });
-  }
+  };
 }
 
 RestaurantsMap.propTypes = {
@@ -38,4 +44,6 @@ RestaurantsMap.propTypes = {
   ).isRequired
 };
 
-export default RestaurantsMap;
+export default connect(state => ({
+  restaurants: restaurantsSelector(state)
+}))(RestaurantsMap);

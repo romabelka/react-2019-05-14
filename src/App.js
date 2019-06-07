@@ -19,7 +19,7 @@ function App() {
       <Content>
         <RestaurantList />
         {/* temporary turn Map off */}
-        {/*{<RestaurantsMap restaurants={props.restaurants} />}*/}
+        {/*{<RestaurantsMap />}*/}
         <OrderList />
         <UserForm />
       </Content>

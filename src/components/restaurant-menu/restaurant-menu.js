@@ -37,6 +37,7 @@ function RestaurantMenu(props) {
 }
 
 RestaurantMenu.propTypes = {
+  id: PropTypes.string.isRequired,
   menu: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
