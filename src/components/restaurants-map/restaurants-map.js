@@ -41,17 +41,6 @@ class RestaurantsMap extends Component {
   };
 }
 
-RestaurantsMap.propTypes = {
-  restaurants: PropTypes.arrayOf(
-    PropTypes.shape({
-      location: PropTypes.shape({
-        lat: PropTypes.number.isRequired,
-        lng: PropTypes.number.isRequired
-      }).isRequired
-    })
-  ).isRequired
-};
-
 export default connect(
   state => (
     {
