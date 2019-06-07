@@ -3,7 +3,12 @@ import Leaflet from "leaflet";
 import * as PropTypes from "prop-types";
 import "./restaurant-map.css";
 import { connect } from "react-redux";
-import { restaurantsSelector } from "../../selectors";
+import {
+  restaurantsLoadedSelector,
+  restaurantsLoadingSelector,
+  restaurantsSelector
+} from "../../selectors";
+import { loadRestaurants } from "../../ac";
 
 class RestaurantsMap extends Component {
   render() {
@@ -13,6 +18,9 @@ class RestaurantsMap extends Component {
     this.div = ref;
   };
   componentDidMount() {
+    if (!this.props.isRestaurantLoading && !this.props.isRestaurantLoaded) {
+      this.props.loadRestaurants();
+    }
     this.map = Leaflet.map(this.div, {
       center: [51.51847684708113, -0.13999606534701844],
       zoom: 12
@@ -44,6 +52,15 @@ RestaurantsMap.propTypes = {
   ).isRequired
 };
 
-export default connect(state => ({
-  restaurants: restaurantsSelector(state)
-}))(RestaurantsMap);
+export default connect(
+  state => (
+    {
+      restaurants: restaurantsSelector(state),
+      isRestaurantLoading: restaurantsLoadingSelector(state),
+      isRestaurantLoaded: restaurantsLoadedSelector(state)
+    },
+    {
+      loadRestaurants
+    }
+  )
+)(RestaurantsMap);

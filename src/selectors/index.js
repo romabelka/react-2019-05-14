@@ -134,9 +134,9 @@ export const createDishesSelector = () =>
     dishesMapSelector,
     restaurantSelector,
     (dishesMap, restaurant) => {
-      return restaurant.menu
-        .map(dishId => dishesMap.get(dishId))
-        .filter(Boolean);
+      return restaurant
+        ? restaurant.menu.map(dishId => dishesMap.get(dishId)).filter(Boolean)
+        : [];
     }
   );
 

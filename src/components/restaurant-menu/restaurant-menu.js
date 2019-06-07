@@ -6,15 +6,20 @@ import { connect } from "react-redux";
 import {
   createDishesSelector,
   dishesLoadedSelector,
-  dishesLoadingSelector
+  dishesLoadingSelector,
+  restaurantsLoadedSelector,
+  restaurantsLoadingSelector
 } from "../../selectors";
-import { loadDishes } from "../../ac";
+import { loadDishes, loadRestaurants } from "../../ac";
 import "./restaurant-menu.css";
 
 function RestaurantMenu(props) {
   useEffect(() => {
     if (!props.isDishesLoading && !props.isDishesLoaded) {
       props.loadDishes();
+    }
+    if (!props.isRestaurantLoading && !props.isRestaurantLoaded) {
+      props.loadRestaurants();
     }
   });
   return (
@@ -47,7 +52,9 @@ const initMapStateToProps = () => {
     return {
       menu: dishSelector(state, ownProps).map(dish => dish.id),
       isDishesLoading: dishesLoadingSelector(state),
-      isDishesLoaded: dishesLoadedSelector(state)
+      isDishesLoaded: dishesLoadedSelector(state),
+      isRestaurantLoading: restaurantsLoadingSelector(state),
+      isRestaurantLoaded: restaurantsLoadedSelector(state)
     };
   };
 };
@@ -55,6 +62,7 @@ const initMapStateToProps = () => {
 export default connect(
   initMapStateToProps,
   {
-    loadDishes
+    loadDishes,
+    loadRestaurants
   }
 )(RestaurantMenu);
