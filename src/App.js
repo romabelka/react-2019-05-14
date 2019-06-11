@@ -1,11 +1,7 @@
 import React from "react";
 import "./App.css";
-import UserForm from "./components/user-form";
-// import RestaurantsMap from "./components/restaurants-map";
 import { Layout, Menu } from "antd";
 import CartBadge from "./components/cart-badge";
-// import Counter from "./components/counter";
-import OrderList from "./components/order-list";
 import { BrowserRouter, Route, NavLink, Switch } from "react-router-dom";
 import ListPage from "./components/routes/list";
 import MapPage from "./components/routes/map";
@@ -51,7 +47,6 @@ function App() {
             />
             <Route path={"/"} render={() => <h2>Page not found</h2>} />
           </Switch>
-          <UserForm />
         </Content>
         <Footer>{/*<Counter />*/}</Footer>
       </Layout>
