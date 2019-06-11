@@ -5,6 +5,9 @@
   "proxy": "http://localhost:3001/",
   "dependencies": {
     "antd": "^3.18.1",
+    "express": "^4.17.1",
+    "express-http-proxy": "^1.5.1",
+    "express-request-proxy": "^2.2.2",
     "immutable": "^4.0.0-rc.12",
     "leaflet": "^1.5.1",
     "prop-types": "^15.7.2",

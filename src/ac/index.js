@@ -52,22 +52,22 @@ export const addReview = (userName, rating, text, restaurantId) => ({
 
 export const loadRestaurants = () => ({
   type: LOAD_RESTAURANTS,
-  callAPI: "http://localhost:3001/api/restaurants"
+  callAPI: "/api/restaurants"
 });
 
 export const loadReviews = () => ({
   type: LOAD_REVIEWS,
-  callAPI: "http://localhost:3001/api/reviews"
+  callAPI: "/api/reviews"
 });
 
 export const loadUsers = () => ({
   type: LOAD_USERS,
-  callAPI: "http://localhost:3001/api/users"
+  callAPI: "/api/users"
 });
 
 export const loadDishes = () => ({
   type: LOAD_DISHES,
-  callAPI: "http://localhost:3001/api/dishes"
+  callAPI: "/api/dishes"
 });
 
 export const loadAllDataForReviews = () => (dispatch, getState) => {
@@ -75,7 +75,7 @@ export const loadAllDataForReviews = () => (dispatch, getState) => {
 
   if (!state.reviews.loaded && !state.reviews.loading) {
     dispatch({ type: LOAD_REVIEWS + START });
-    fetch("http://localhost:3001/api/reviews")
+    fetch("/api/reviews")
       .then(res => res.json())
       .then(data => {
         dispatch({ type: LOAD_REVIEWS + SUCCESS, response: data });
@@ -85,7 +85,7 @@ export const loadAllDataForReviews = () => (dispatch, getState) => {
 
   if (!state.users.loaded && !state.users.loading) {
     dispatch({ type: LOAD_USERS + START });
-    fetch("http://localhost:3001/api/users")
+    fetch("/api/users")
       .then(res => res.json())
       .then(data => {
         dispatch({ type: LOAD_USERS + SUCCESS, response: data });
